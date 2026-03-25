@@ -14,36 +14,43 @@ dotnet add package Philiprehberger.PasswordStrength
 
 ## Usage
 
+### Evaluate Password Strength
+
 ```csharp
 using Philiprehberger.PasswordStrength;
 
-// Evaluate password strength
 var score = Password.Evaluate("MyP@ssw0rd!");
 Console.WriteLine(score.Score);     // 3 (0=very weak, 4=very strong)
 Console.WriteLine(score.Entropy);   // 52.4 (bits)
 Console.WriteLine(score.CrackTime); // "centuries"
 foreach (var tip in score.Feedback)
     Console.WriteLine(tip);
+```
 
-// Check against common passwords
+### Common Password Detection and Policy Validation
+
+```csharp
+using Philiprehberger.PasswordStrength;
+
 bool common = Password.IsCommon("password123"); // true
 bool unique = Password.IsCommon("xK9#mP2!vL");  // false
 
-// Policy-based validation
-var policy = new PasswordPolicy
-{
-    MinLength = 12,
-    MinScore = 3,
-    RejectCommon = true
-};
-
+var policy = new PasswordPolicy(MinLength: 12, MinScore: 3, RejectCommon: true);
 bool valid = Password.MeetsPolicy("MyStr0ng!Pass", policy); // true
 bool weak  = Password.MeetsPolicy("password", policy);      // false
+```
 
-// Direct entropy calculation
+### Entropy Calculation and Pattern Detection
+
+```csharp
+using Philiprehberger.PasswordStrength;
+
 double entropy = EntropyCalculator.Calculate("hello");
-var patterns = EntropyCalculator.DetectPatterns("qwerty123");
-// ["keyboard walk", "sequential digits"]
+Console.WriteLine(entropy); // 23.5 (bits)
+
+string[] patterns = EntropyCalculator.DetectPatterns("qwerty123");
+foreach (var pattern in patterns)
+    Console.WriteLine(pattern); // "keyboard walk", "sequential characters"
 ```
 
 ## API
