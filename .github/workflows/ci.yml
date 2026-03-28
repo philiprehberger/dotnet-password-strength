@@ -17,6 +17,7 @@ jobs:
           dotnet-version: '8.0.x'
       - run: dotnet restore src/Philiprehberger.PasswordStrength.csproj
       - run: dotnet build src/Philiprehberger.PasswordStrength.csproj --configuration Release --no-restore
+      - run: dotnet test tests/Philiprehberger.PasswordStrength.Tests/Philiprehberger.PasswordStrength.Tests.csproj --configuration Release --no-restore
 
   publish:
     needs: build

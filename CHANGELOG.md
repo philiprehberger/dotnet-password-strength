@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.0 (2026-03-27)
+
+- Add context-aware password checking (username, email, name exclusion)
+- Add keyboard pattern detection for QWERTY layout sequences
+- Add passphrase evaluation mode for word-based passwords
+- Add structured feedback messages with categories and actionable suggestions
+
 ## 0.1.1 (2026-03-24)
 
 - Expand README usage section with feature subsections

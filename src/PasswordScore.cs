@@ -7,4 +7,10 @@ namespace Philiprehberger.PasswordStrength;
 /// <param name="Entropy">Shannon entropy of the password in bits.</param>
 /// <param name="CrackTime">Human-readable estimate of time to crack the password.</param>
 /// <param name="Feedback">Array of improvement suggestions for the password.</param>
-public record PasswordScore(int Score, double Entropy, string CrackTime, string[] Feedback);
+public record PasswordScore(int Score, double Entropy, string CrackTime, string[] Feedback)
+{
+    /// <summary>
+    /// Gets or sets structured feedback messages with categories and actionable suggestions.
+    /// </summary>
+    public List<FeedbackItem> StructuredFeedback { get; init; } = [];
+}
